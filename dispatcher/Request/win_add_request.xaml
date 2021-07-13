@@ -1,0 +1,19 @@
+﻿<Window x:Class="dispatcher.Request.win_add_request"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dispatcher.Request"
+        mc:Ignorable="d"
+        Title="win_add_request" Height="350" Width="400">
+    <Grid>
+        <Label Content="Оборудование" HorizontalAlignment="Left" Margin="66,35,0,0" VerticalAlignment="Top" Height="35" Width="268"/>
+        <TextBox x:Name="equipment" HorizontalAlignment="Left" Margin="66,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
+        <Label Content="Услуга" HorizontalAlignment="Left" Margin="66,105,0,0" VerticalAlignment="Top" Height="35" Width="268"/>
+        <TextBox x:Name="service" HorizontalAlignment="Left" Margin="66,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
+        <Label Content="Уровень срочности" HorizontalAlignment="Left" Margin="66,175,0,0" VerticalAlignment="Top" Height="44" Width="268"/>
+        <TextBox x:Name="urgency" HorizontalAlignment="Left" Margin="66,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" Margin="134,260,0,0" VerticalAlignment="Top" Height="32" Width="132" Click="Apply_add_request"/>
+        
+    </Grid>
+</Window>

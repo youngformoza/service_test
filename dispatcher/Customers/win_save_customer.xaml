@@ -1,0 +1,21 @@
+﻿<Window x:Class="dispatcher.Customers.win_save_customer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dispatcher.Customers"
+        mc:Ignorable="d"
+        Title="win_save_customer" Height="450" Width="400">
+    <Grid>
+        <Label Content="ФИО" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Top" Height="35" Width="268"/>
+        <TextBox x:Name="customer_name" HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
+        <Label Content="Должность " HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Height="35" Width="268"/>
+        <TextBox x:Name="customer_position" HorizontalAlignment="Center" Margin="0,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
+        <Label Content="Почта" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Height="44" Width="268"/>
+        <TextBox x:Name="customer_mail" HorizontalAlignment="Center" Margin="0,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
+        <Label Content="Номер телефона" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Height="44" Width="268"/>
+        <TextBox x:Name="customer_phone" HorizontalAlignment="Center" Margin="0,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
+        <Button Content="Изменить" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" Height="32" Width="132" Click="Apply_save_customer"/>
+
+    </Grid>
+</Window>

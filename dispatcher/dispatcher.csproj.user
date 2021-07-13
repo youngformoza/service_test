@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Customers\win_add_customer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Customers\win_del_customer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Customers\win_save_customer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Request\win_add_request.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Request\win_save_request.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Customers\win_add_customer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Customers\win_del_customer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Customers\win_save_customer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Request\win_add_request.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Request\win_save_request.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,8 @@
+C:\Users\Yulya\Desktop\university\4_terms\summer_practice\DB_Connections\bin\Debug\netcoreapp3.1\DB_Connections.deps.json
+C:\Users\Yulya\Desktop\university\4_terms\summer_practice\DB_Connections\bin\Debug\netcoreapp3.1\DB_Connections.dll
+C:\Users\Yulya\Desktop\university\4_terms\summer_practice\DB_Connections\bin\Debug\netcoreapp3.1\DB_Connections.pdb
+C:\Users\Yulya\Desktop\university\4_terms\summer_practice\DB_Connections\obj\Debug\netcoreapp3.1\DB_Connections.csprojAssemblyReference.cache
+C:\Users\Yulya\Desktop\university\4_terms\summer_practice\DB_Connections\obj\Debug\netcoreapp3.1\DB_Connections.AssemblyInfoInputs.cache
+C:\Users\Yulya\Desktop\university\4_terms\summer_practice\DB_Connections\obj\Debug\netcoreapp3.1\DB_Connections.AssemblyInfo.cs
+C:\Users\Yulya\Desktop\university\4_terms\summer_practice\DB_Connections\obj\Debug\netcoreapp3.1\DB_Connections.dll
+C:\Users\Yulya\Desktop\university\4_terms\summer_practice\DB_Connections\obj\Debug\netcoreapp3.1\DB_Connections.pdb
