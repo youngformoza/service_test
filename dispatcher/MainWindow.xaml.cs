@@ -69,11 +69,9 @@ namespace dispatcher
 
         private void del_customer(object sender, RoutedEventArgs e)
         {
-            var delCustomerDialog = new win_del_customer();
-            delCustomerDialog.ShowDialog();
-
-            var CustomerToDel = baseCustomersRepository.GetById(delCustomerDialog.customerId);
-            baseCustomersRepository.Delete(CustomerToDel);
+            var chosenId = baseCustomersRepository.GetId(customers_table.SelectedIndex);
+            var ChCus = baseCustomersRepository.GetById(chosenId);
+            baseCustomersRepository.Delete(ChCus);
             customers_table.ItemsSource = baseCustomersRepository.GetCustomers();
         }
 
