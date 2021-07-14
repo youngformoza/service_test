@@ -29,6 +29,10 @@ namespace dispatcher.Customers
             InitializeComponent();
 
             customer_name.Text = UpdatingCustomer?.name;
+            customer_position.Text = UpdatingCustomer?.position_cus;
+            customer_mail.Text = UpdatingCustomer?.mail;
+            customer_phone.Text = UpdatingCustomer?.phone.ToString();
+            bd_customer.SelectedDate = UpdatingCustomer?.birthday;
         }
 
         private void Apply_save_customer(object sender, RoutedEventArgs e)
@@ -39,6 +43,8 @@ namespace dispatcher.Customers
 
             if (int.TryParse(customer_phone.Text, out var number))
                 UpdatingCustomer.phone = number;
+
+            UpdatingCustomer.birthday = bd_customer.SelectedDate.Value;
 
             Close();
         }

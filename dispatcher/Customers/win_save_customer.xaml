@@ -15,7 +15,9 @@
         <TextBox x:Name="customer_mail" HorizontalAlignment="Center" Margin="0,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
         <Label Content="Номер телефона" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Height="44" Width="268"/>
         <TextBox x:Name="customer_phone" HorizontalAlignment="Center" Margin="0,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
-        <Button Content="Изменить" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" Height="32" Width="132" Click="Apply_save_customer"/>
+        <Button Content="Сохранить" HorizontalAlignment="Center" Margin="0,360,0,0" VerticalAlignment="Top" Height="32" Width="132" Click="Apply_save_customer"/>
+        <Label Content="День рождения" HorizontalAlignment="Left" Margin="68,315,0,0" VerticalAlignment="Top" Height="44" Width="132"/>
+        <DatePicker Name="bd_customer" HorizontalAlignment="Left" Margin="234,315,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

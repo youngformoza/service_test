@@ -20,7 +20,8 @@ namespace dispatcher.Customers
     /// </summary>
     public partial class win_del_customer : Window
     {
-        public static IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
+        public int customerId;
+        //public static IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
         public win_del_customer()
         {
             InitializeComponent();
@@ -28,17 +29,7 @@ namespace dispatcher.Customers
 
         private void del_customer_Click(object sender, RoutedEventArgs e)
         {
-            var custom_id = int.Parse(customer_id.Text);
-
-            var customerToDel = baseCustomersRepository.GetById(custom_id);
-
-            if (customerToDel == null)
-            {
-                Console.WriteLine("Произошла ошибка удаления");
-                return;
-            }
-
-            baseCustomersRepository.Delete(customerToDel);
+            customerId = int.Parse(customer_id.Text);
 
             Close();
         }
