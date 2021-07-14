@@ -21,17 +21,10 @@ namespace dispatcher.Request
     /// </summary>
     public partial class win_add_request : Window
     {
-        public static IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
-        public static IBaseRequestsRepository baseRequestRepository = new RequestsRepository();
+        public DB_Connections.Entities.Request AddingRequest { get; set; }
 
-        public static IBaseVendorRepository baseVendorRepository = new vendor_repository();
-        public static IBaseStatusRepository baseStatusRepository = new status_repository();
-        public static IBaseServicesRepository baseServicesRepository = new services_repository();
-        public static IBasePositionRepository basePositionRepository = new positions_repository(); 
-        public static IBaseEquipmentClassRepository baseEquipmentClassRepository = new equipment_class_repository();
-        public static IBaseEquipmentRepository baseEquipmentRepository = new equipment_repository();
-        public static IBaseEmployeesRepository baseEmployeesRepository = new employees_repository();
-
+        public string ChEquipmentSeries;
+        public string ChEquipmentService;
 
 
         public win_add_request()
@@ -41,14 +34,17 @@ namespace dispatcher.Request
 
         private void Apply_add_request(object sender, RoutedEventArgs e)
         {
-            var ch_equipment = baseEquipmentRepository.GetByName(equipment_series.Text);
-            var ch_service = baseServicesRepository.GetByName(service.Text);
-            var customer = baseCustomersRepository.GetById(1); //////////////////////////// ИЗМЕНИТЬ НА ВЫБРАННЫЙ В ДРУГОЙ ТАБЛИЦЕ *передавать в функцию значение*
-            var empl_recep = baseEmployeesRepository.GetById(1); ///////////////////////// ПЕРЕДАВАТЬ В ФУНКЦИЮ ID ДИСПЕТЧЕРА
-            var ch_status = baseStatusRepository.GetByName("Добавлен");
-            baseRequestRepository.AddRequest(new request(DateTime.Now, urgency.Text, customer, ch_equipment, ch_service, empl_recep, ch_status));
+
+            AddingRequest = new DB_Connections.Entities.Request(DateTime.Now, "0", null, null, null, null);
+
+            AddingRequest.date_time_start = DateTime.Now;
+            AddingRequest.urgency = urgency.Text;
+
+            ChEquipmentSeries = equipment_series.Text;
+            ChEquipmentService = service.Text;
 
             Close();
+            
         }
     }
 }

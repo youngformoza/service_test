@@ -17,19 +17,15 @@ namespace dispatcher.Request
 {
     /// <summary>
     /// Логика взаимодействия для win_save_request.xaml
-    /// </summary>
+    /// </summary> 
+    
     public partial class win_save_request : Window
     {
-        public static IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
-        public static IBaseRequestsRepository baseRequestRepository = new RequestsRepository();
+        public DB_Connections.Entities.Request UpdatingRequest { get; set; }
 
-        public static IBaseVendorRepository baseVendorRepository = new vendor_repository();
-        public static IBaseStatusRepository baseStatusRepository = new status_repository();
-        public static IBaseServicesRepository baseServicesRepository = new services_repository();
-        public static IBasePositionRepository basePositionRepository = new positions_repository();
-        public static IBaseEquipmentClassRepository baseEquipmentClassRepository = new equipment_class_repository();
-        public static IBaseEquipmentRepository baseEquipmentRepository = new equipment_repository();
-        public static IBaseEmployeesRepository baseEmployeesRepository = new employees_repository();
+        public string ChEquipmentSeries;
+        public string ChEquipmentService;
+        public string ChEquipmentStatus;
 
         public win_save_request()
         {
@@ -38,11 +34,19 @@ namespace dispatcher.Request
 
         private void Apply_save_request(object sender, RoutedEventArgs e)
         {
-            var ch_equipment = baseEquipmentRepository.GetByName(equipment_series.Text);
-            var ch_service = baseServicesRepository.GetByName(service.Text);
-            var empl_recep = baseEmployeesRepository.GetById(1); ///////////////////////// ПЕРЕДАВАТЬ В ФУНКЦИЮ ID ДИСПЕТЧЕРА
-            var ch_status = baseStatusRepository.GetByName(status.Text);
-            baseRequestRepository.Update(new request(DateTime.Now, urgency.Text, ch_equipment, ch_service, empl_recep, ch_status));
+            UpdatingRequest = new DB_Connections.Entities.Request(DateTime.Now, "0", null, null, null, null);
+
+            UpdatingRequest.date_time_start = DateTime.Now;
+            UpdatingRequest.urgency = urgency.Text;
+
+            ChEquipmentSeries = equipment_series.Text;
+            ChEquipmentService = service.Text;
+            ChEquipmentStatus = status.Text;
+
+            if (ChEquipmentStatus == "Завершен")
+                UpdatingRequest.date_time_end = DateTime.Now;
+
+            Close();
         }
     }
 }
