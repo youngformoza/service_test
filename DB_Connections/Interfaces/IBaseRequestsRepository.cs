@@ -7,13 +7,15 @@ namespace DB_Connections.Interfaces
 {
     public interface IBaseRequestsRepository
     {
-        request[] GetRequests();
+        Request[] GetRequests();
 
-        request GetById(int id);
+        Request GetById(int id);
 
-        void AddRequest (request request);
+        int GetId(int currentRow);
 
-        void Update(request request);
+        void AddRequest (Request request);
+
+        void Update(Request request);
 
     }
 }

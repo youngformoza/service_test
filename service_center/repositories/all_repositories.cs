@@ -129,7 +129,8 @@ namespace service_center.repositories
             /*
             equipment ch_equipment = equipment_list.Find(item => item.series == name);
 
-            return ch_equipment;*/
+            return ch_equipment;
+            */
         }
         
     }
