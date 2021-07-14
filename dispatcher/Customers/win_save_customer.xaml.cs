@@ -20,15 +20,25 @@ namespace dispatcher.Customers
     /// </summary>
     public partial class win_save_customer : Window
     {
-        public static IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
-        public win_save_customer()
+        public Customer UpdatingCustomer { get; set; }
+
+        public win_save_customer(Customer customer)
         {
+            UpdatingCustomer = customer;
+
             InitializeComponent();
+
+            customer_name.Text = UpdatingCustomer?.name;
         }
 
         private void Apply_save_customer(object sender, RoutedEventArgs e)
         {
-           baseCustomersRepository.Update(new Customer(customer_name.Text, customer_position.Text, customer_mail.Text, int.Parse(customer_phone.Text)));
+            UpdatingCustomer.name = customer_name.Text;
+            UpdatingCustomer.position_cus = customer_position.Text;
+            UpdatingCustomer.mail = customer_mail.Text;
+
+            if (int.TryParse(customer_phone.Text, out var number))
+                UpdatingCustomer.phone = number;
 
             Close();
         }
