@@ -6,4 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DB_Connections\DB_Connections.csproj" />
+    <ProjectReference Include="..\service_center\service_center.csproj" />
+  </ItemGroup>
+
 </Project>

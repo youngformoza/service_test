@@ -9,6 +9,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using service_center.repositories;
+using DB_Connections.Entities;
+using DB_Connections.Interfaces;
+
 
 namespace dispatcher.Customers
 {
@@ -17,6 +21,7 @@ namespace dispatcher.Customers
     /// </summary>
     public partial class win_add_customer : Window
     {
+        public static IBaseCustomersRepository baseCustomersRepository = new customers_repository();
         public win_add_customer()
         {
             InitializeComponent();
@@ -24,7 +29,8 @@ namespace dispatcher.Customers
 
         private void Apply_add_customer(object sender, RoutedEventArgs e)
         {
-
+            baseCustomersRepository.AddCustomer(new customer(customer_name.Text, customer_position.Text, bd_customer.DisplayDate, customer_mail.Text, int.Parse(customer_phone.Text)));
+            Close();
         }
     }
 }

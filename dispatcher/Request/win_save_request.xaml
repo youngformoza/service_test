@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="win_save_request" Height="420" Width="400">
     <Grid>
-        <Label Content="Оборудование" HorizontalAlignment="Left" Margin="66,35,0,0" VerticalAlignment="Top" Height="35" Width="268"/>
-        <TextBox x:Name="equipment" HorizontalAlignment="Left" Margin="66,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
+        <Label Content="Оборудование (серия)" HorizontalAlignment="Left" Margin="66,35,0,0" VerticalAlignment="Top" Height="35" Width="268"/>
+        <TextBox x:Name="equipment_series" HorizontalAlignment="Left" Margin="66,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
         <Label Content="Услуга" HorizontalAlignment="Left" Margin="66,105,0,0" VerticalAlignment="Top" Height="35" Width="268"/>
         <TextBox x:Name="service" HorizontalAlignment="Left" Margin="66,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
         <Label Content="Уровень срочности" HorizontalAlignment="Left" Margin="66,175,0,0" VerticalAlignment="Top" Height="44" Width="268"/>

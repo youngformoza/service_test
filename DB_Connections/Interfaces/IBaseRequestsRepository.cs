@@ -5,16 +5,15 @@ using DB_Connections.Entities;
 
 namespace DB_Connections.Interfaces
 {
-    interface IBaseRequestsRepository
+    public interface IBaseRequestsRepository
     {
-        requests[] GetRequests();
+        request[] GetRequests();
 
-        requests GetById(int id);
+        request GetById(int id);
 
-        requests AddRequest (requests request);
+        void AddRequest (request request);
 
-        requests Update(requests request);
+        void Update(request request);
 
-        void Delete(requests request);
     }
 }

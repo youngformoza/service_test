@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\DB_Connections\\DB_Connections.csproj": {}
+    "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\DB_Connections\\DB_Connections.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\DB_Connections\\DB_Connections.csproj": {
+    "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\DB_Connections\\DB_Connections.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\DB_Connections\\DB_Connections.csproj",
+        "projectUniqueName": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\DB_Connections\\DB_Connections.csproj",
         "projectName": "DB_Connections",
-        "projectPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\DB_Connections\\DB_Connections.csproj",
+        "projectPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\DB_Connections\\DB_Connections.csproj",
         "packagesPath": "C:\\Users\\Yulya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\DB_Connections\\obj\\",
+        "outputPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\DB_Connections\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yulya\\AppData\\Roaming\\NuGet\\NuGet.Config",

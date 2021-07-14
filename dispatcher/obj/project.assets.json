@@ -1,11 +1,49 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "DB_Connections/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/DB_Connections.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DB_Connections.dll": {}
+        }
+      },
+      "service_center/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "DB_Connections": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/service_center.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/service_center.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "DB_Connections/1.0.0": {
+      "type": "project",
+      "path": "../DB_Connections/DB_Connections.csproj",
+      "msbuildProject": "../DB_Connections/DB_Connections.csproj"
+    },
+    "service_center/1.0.0": {
+      "type": "project",
+      "path": "../service_center/service_center.csproj",
+      "msbuildProject": "../service_center/service_center.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "DB_Connections >= 1.0.0",
+      "service_center >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Yulya\\.nuget\\packages\\": {}
@@ -13,11 +51,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\dispatcher\\dispatcher.csproj",
+      "projectUniqueName": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\dispatcher\\dispatcher.csproj",
       "projectName": "dispatcher",
-      "projectPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\dispatcher\\dispatcher.csproj",
+      "projectPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\dispatcher\\dispatcher.csproj",
       "packagesPath": "C:\\Users\\Yulya\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\dispatcher\\obj\\",
+      "outputPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\dispatcher\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yulya\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -32,7 +70,14 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\DB_Connections\\DB_Connections.csproj": {
+              "projectPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\DB_Connections\\DB_Connections.csproj"
+            },
+            "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\service_center\\service_center.csproj": {
+              "projectPath": "C:\\Users\\Yulya\\Desktop\\university\\4_terms\\summer_practice\\service\\service_center\\service_center.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

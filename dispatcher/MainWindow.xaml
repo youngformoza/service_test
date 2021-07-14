@@ -19,18 +19,10 @@
             </MenuItem>
         </Menu>
         <TextBox x:Name="find_customer" Margin="10,30,401,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23"/>
-        <DataGrid Height="521" Margin="10,53,401,0" x:Name="customers_table" VerticalAlignment="Top">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Width="30"/>
-                <DataGridTextColumn Header="ФИО" Width="150"/>
-                <DataGridTextColumn Header="Должность" Width="100"/>
-                <DataGridTemplateColumn Header="День рождения" Width="101"/>
-                <DataGridTextColumn Header="Почта" Width="100"/>
-                <DataGridTextColumn Header="Номер телефона" Width="110"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <DataGrid Height="521" Margin="10,53,401,0" x:Name="customers_table" VerticalAlignment="Top" AutoGenerateColumns="True"
+          AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" IsEnabled="False" x:FieldModifier="public" />
         <TextBox x:Name="find_request" Margin="622,30,8,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23"/>
-        <DataGrid Height="521" Margin="622,53,8,0" x:Name="request_table" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
+        <DataGrid Height="521" Margin="622,53,8,0" x:Name="request_table" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" IsEnabled="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Width="30"/>
                 <DataGridTextColumn Header="Оборудование" Width="150"/>

@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {
       "service_center/1.0.0": {
+        "dependencies": {
+          "DB_Connections": "1.0.0"
+        },
         "runtime": {
           "service_center.dll": {}
+        }
+      },
+      "DB_Connections/1.0.0": {
+        "runtime": {
+          "DB_Connections.dll": {}
         }
       }
     }
   },
   "libraries": {
     "service_center/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DB_Connections/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
