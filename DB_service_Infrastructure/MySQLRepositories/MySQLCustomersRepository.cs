@@ -54,7 +54,7 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 connection.Open();
 
-                using var command = new MySqlCommand("SELECT id_cus, `name`, `position`, birthday, mail, phone FROM customers; WHERE id_cus = @id", connection);
+                using var command = new MySqlCommand("SELECT id_cus, `name`, `position`, birthday, mail, phone FROM customers WHERE id_cus = @id", connection);
 
                 command.Parameters.AddWithValue("id", id);
 
