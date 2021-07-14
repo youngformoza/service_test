@@ -20,8 +20,8 @@ namespace dispatcher.Request
     /// </summary>
     public partial class win_save_request : Window
     {
-        public static IBaseCustomersRepository baseCustomersRepository = new customers_repository();
-        public static IBaseRequestsRepository baseRequestRepository = new requests_repository();
+        public static IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
+        public static IBaseRequestsRepository baseRequestRepository = new RequestsRepository();
 
         public static IBaseVendorRepository baseVendorRepository = new vendor_repository();
         public static IBaseStatusRepository baseStatusRepository = new status_repository();

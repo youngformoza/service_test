@@ -20,7 +20,7 @@ namespace dispatcher.Customers
     /// </summary>
     public partial class win_del_customer : Window
     {
-        public static IBaseCustomersRepository baseCustomersRepository = new customers_repository();
+        public static IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
         public win_del_customer()
         {
             InitializeComponent();

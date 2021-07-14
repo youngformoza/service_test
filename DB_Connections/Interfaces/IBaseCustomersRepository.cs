@@ -7,14 +7,14 @@ namespace DB_Connections.Interfaces
 {
     public interface IBaseCustomersRepository
     {
-        customer[] GetCustomers();
+        Customer[] GetCustomers();
 
-        customer GetById(int id);
+        Customer GetById(int id);
 
-        void AddCustomer(customer new_customer);
+        void AddCustomer(Customer new_customer);
 
-        void Update(customer ch_customer);
+        void Update(Customer ch_customer);
 
-        void Delete(customer ch_customer);
+        void Delete(Customer ch_customer);
     }
 }

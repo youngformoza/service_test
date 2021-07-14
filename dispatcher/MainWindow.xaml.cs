@@ -27,8 +27,8 @@ namespace dispatcher
     /// </summary>
     public partial class MainWindow : Window
     {
-        public IBaseCustomersRepository baseCustomersRepository = new customers_repository();
-        public IBaseRequestsRepository baseRequestRepository = new requests_repository();
+        public IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
+        public IBaseRequestsRepository baseRequestRepository = new RequestsRepository();
         public MainWindow()
         {
             InitializeComponent();

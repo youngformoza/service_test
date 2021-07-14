@@ -21,7 +21,7 @@ namespace dispatcher.Customers
     /// </summary>
     public partial class win_add_customer : Window
     {
-        public static IBaseCustomersRepository baseCustomersRepository = new customers_repository();
+        public static IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
         public win_add_customer()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace dispatcher.Customers
 
         private void Apply_add_customer(object sender, RoutedEventArgs e)
         {
-            baseCustomersRepository.AddCustomer(new customer(customer_name.Text, customer_position.Text, bd_customer.DisplayDate, customer_mail.Text, int.Parse(customer_phone.Text)));
+            baseCustomersRepository.AddCustomer(new Customer(customer_name.Text, customer_position.Text, bd_customer.DisplayDate, customer_mail.Text, int.Parse(customer_phone.Text)));
             Close();
         }
     }

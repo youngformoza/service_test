@@ -14,7 +14,7 @@ namespace DB_Connections.Entities
 
         public string urgency { get; set; }
 
-        public customer cus { get; set; }
+        public Customer cus { get; set; }
 
         public equipment eq { get; set; } 
 
@@ -26,7 +26,7 @@ namespace DB_Connections.Entities
 
         public status stat { get; set; }
 
-        public request(int id_req, DateTime date_time_start, DateTime date_time_end, string urgency, customer cus, equipment eq, services ser, employees recep, employees eng, status stat)
+        public request(int id_req, DateTime date_time_start, DateTime date_time_end, string urgency, Customer cus, equipment eq, services ser, employees recep, employees eng, status stat)
         {
             this.id_req = id_req;
             this.date_time_start = date_time_start;
@@ -40,7 +40,7 @@ namespace DB_Connections.Entities
             this.stat = stat;
         }
 
-        public request(DateTime date_time_start, string urgency, customer cus, equipment eq, services ser, employees recep, status stat)
+        public request(DateTime date_time_start, string urgency, Customer cus, equipment eq, services ser, employees recep, status stat)
         {
             this.date_time_start = date_time_start;
             this.urgency = urgency;
@@ -51,7 +51,7 @@ namespace DB_Connections.Entities
             this.stat = stat;
         }
 
-        public request(int id_req, DateTime date_time_start, string urgency, customer cus, equipment eq, services ser, employees recep, status stat)
+        public request(int id_req, DateTime date_time_start, string urgency, Customer cus, equipment eq, services ser, employees recep, status stat)
         {
             this.id_req = id_req;
             this.date_time_start = date_time_start;

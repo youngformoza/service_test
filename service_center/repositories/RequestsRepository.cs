@@ -6,20 +6,26 @@ using DB_Connections.Interfaces;
 
 namespace service_center.repositories
 {
-    public class requests_repository : IBaseRequestsRepository
+    public class RequestsRepository : IBaseRequestsRepository
     {
         public List<request> requests_list = new List<request>();
 
-        /*
-        public requests_repository()
+        
+        public RequestsRepository()
         {
-            requests_list.Add(new request(1, DateTime.Now, "срочно", 1, 1, 1, 1, 1));
-            requests_list.Add(new request(2, "Bl", "man", DateTime.Now, "kiko", 88808));
-            requests_list.Add(new request(3, "Cl", "eng", DateTime.Now, "keko", 80888));
-            requests_list.Add(new request(4, "Dl", "dir", DateTime.Now, "kvko", 80800));
-            requests_list.Add(new request(5, "El", "eng", DateTime.Now, "kqko", 80000));
+            var customersRep = new CustomersRepository();
+
+            var customers = customersRep.GetCustomers();
+
+
+
+            //requests_list.Add(new request(1, DateTime.Now, "срочно", 1, 1, 1, 1, 1));
+            //requests_list.Add(new request(2, "Bl", "man", DateTime.Now, "kiko", 88808));
+            //requests_list.Add(new request(3, "Cl", "eng", DateTime.Now, "keko", 80888));
+            //requests_list.Add(new request(4, "Dl", "dir", DateTime.Now, "kvko", 80800));
+            //requests_list.Add(new request(5, "El", "eng", DateTime.Now, "kqko", 80000));
         }
-        */
+        
 
         public void AddRequest(request new_request)
         {

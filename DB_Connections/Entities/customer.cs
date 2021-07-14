@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DB_Connections.Entities
 {
-    public class customer
+    public class Customer
     {
         [DisplayName("ID")]
         public int id_cus { get; }
@@ -25,7 +25,7 @@ namespace DB_Connections.Entities
         [DisplayName("Номер телефона")]
         public long phone { get; set; }
 
-        public customer(int id_cus, string name, string position, DateTime birthday, string mail, long phone)
+        public Customer(int id_cus, string name, string position, DateTime birthday, string mail, long phone)
         {
             this.id_cus = id_cus;
             this.name = name;
@@ -35,7 +35,7 @@ namespace DB_Connections.Entities
             this.phone = phone;
         }
 
-        public customer(string name, string position_cus, DateTime birthday, string mail, long phone)
+        public Customer(string name, string position_cus, DateTime birthday, string mail, long phone)
         {
             this.name = name;
             this.position_cus = position_cus;
@@ -44,7 +44,7 @@ namespace DB_Connections.Entities
             this.phone = phone;
         }
 
-        public customer(string name, string position_cus, string mail, long phone)
+        public Customer(string name, string position_cus, string mail, long phone)
         {
             this.name = name;
             this.position_cus = position_cus;

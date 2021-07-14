@@ -20,7 +20,7 @@ namespace dispatcher.Customers
     /// </summary>
     public partial class win_save_customer : Window
     {
-        public static IBaseCustomersRepository baseCustomersRepository = new customers_repository();
+        public static IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
         public win_save_customer()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace dispatcher.Customers
 
         private void Apply_save_customer(object sender, RoutedEventArgs e)
         {
-           baseCustomersRepository.Update(new customer(customer_name.Text, customer_position.Text, customer_mail.Text, int.Parse(customer_phone.Text)));
+           baseCustomersRepository.Update(new Customer(customer_name.Text, customer_position.Text, customer_mail.Text, int.Parse(customer_phone.Text)));
 
             Close();
         }
