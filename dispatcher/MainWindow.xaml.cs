@@ -29,20 +29,24 @@ namespace dispatcher
     {
         public IBaseCustomersRepository baseCustomersRepository = new CustomersRepository();
         public IBaseRequestsRepository baseRequestRepository = new RequestsRepository();
+        public IBaseEquipmentRepository baseEquipmentRepository = new equipment_repository();
+        public IBaseServicesRepository baseServicesRepository = new services_repository();
+        public IBaseStatusRepository baseStatusRepository = new status_repository();
+
         public MainWindow()
         {
             InitializeComponent();
             customers_table.ItemsSource = baseCustomersRepository.GetCustomers();
-            AllocConsole();
         }
 
-        [DllImport("Kernel32.dll")]
-        static extern void AllocConsole();
 
 
         private void save_customer(object sender, RoutedEventArgs e)
         {
-            var updateCustomerDialog = new win_save_customer(baseCustomersRepository.GetById(1)); // id получить из таблицы)
+            var chosenId = baseCustomersRepository.GetId(customers_table.SelectedIndex);
+
+
+            var updateCustomerDialog = new win_save_customer(baseCustomersRepository.GetById(chosenId));   // id получить из таблицы)
 
             updateCustomerDialog.ShowDialog();
 
@@ -53,48 +57,95 @@ namespace dispatcher
 
         private void add_customer(object sender, RoutedEventArgs e)
         {
-            //List<customer> all_customers = new List<customer>();
-            var index = new win_add_customer();
-            index.ShowDialog();
-            //var taken_customers =  baseCustomersRepository.GetCustomers();
-            //foreach (customer ch_customer in taken_customers)
-            //{
-            //    all_customers.Add(ch_customer);
-            //}
+            var addCustomerDialog = new win_add_customer(); 
 
-            //customers_table.ItemsSource = all_customers;
-            var actualCustomers =  baseCustomersRepository.GetCustomers();
+            addCustomerDialog.ShowDialog();
 
-            customers_table.ItemsSource = actualCustomers;
+            baseCustomersRepository.AddCustomer(addCustomerDialog.AddingCustomer);
 
-            foreach (Customer customer in actualCustomers)
-            {
-                Console.WriteLine(customer);
-            }
+            customers_table.ItemsSource = baseCustomersRepository.GetCustomers();
+
         }
 
         private void del_customer(object sender, RoutedEventArgs e)
         {
-            var index = new win_del_customer();
-            index.ShowDialog();
+            var delCustomerDialog = new win_del_customer();
+            delCustomerDialog.ShowDialog();
+
+            var CustomerToDel = baseCustomersRepository.GetById(delCustomerDialog.customerId);
+            baseCustomersRepository.Delete(CustomerToDel);
             customers_table.ItemsSource = baseCustomersRepository.GetCustomers();
         }
 
         private void save_request(object sender, RoutedEventArgs e)
         {
-            var index = new win_save_request();
-            index.ShowDialog();
+            var updRequestDialog = new win_save_request();
+            updRequestDialog.ShowDialog();
+            var ChEq = baseEquipmentRepository.GetByName(updRequestDialog.ChEquipmentSeries);
+            var ChSer = baseServicesRepository.GetByName(updRequestDialog.ChEquipmentService);
+            var chosenId = baseCustomersRepository.GetId(customers_table.SelectedIndex);
+            var ChCus = baseCustomersRepository.GetById(chosenId);
+            var ChStat = baseStatusRepository.GetByName(updRequestDialog.ChEquipmentStatus);
+
+            updRequestDialog.UpdatingRequest.cus = ChCus;
+            updRequestDialog.UpdatingRequest.eq = ChEq;
+            updRequestDialog.UpdatingRequest.ser = ChSer;
+            updRequestDialog.UpdatingRequest.stat = ChStat;
         }
 
         private void add_request(object sender, RoutedEventArgs e)
         {
-            var index = new win_add_request();
-            index.ShowDialog();
+            var addRequestDialog = new win_add_request();
+            addRequestDialog.ShowDialog();
+            var ChEq = baseEquipmentRepository.GetByName(addRequestDialog.ChEquipmentSeries);
+            var ChSer = baseServicesRepository.GetByName(addRequestDialog.ChEquipmentService);
+            var chosenId = baseCustomersRepository.GetId(customers_table.SelectedIndex);
+            var ChCus = baseCustomersRepository.GetById(chosenId);
+
+            addRequestDialog.AddingRequest.cus = ChCus;
+            addRequestDialog.AddingRequest.eq = ChEq;
+            addRequestDialog.AddingRequest.ser = ChSer;
                         
         }
 
         private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
     => e.Column.Header = ((PropertyDescriptor)e.PropertyDescriptor).DisplayName;
+
+
+        private void find_customer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            string filter = t.Text;
+            ICollectionView viewSource = CollectionViewSource.GetDefaultView(customers_table.ItemsSource);
+            if (filter == "") viewSource.Filter = null;
+            else
+            {
+                viewSource.Filter = o =>
+                {
+                    Customer p = o as Customer;
+                    return p.name.ToString().Contains(filter);
+                };
+                customers_table.ItemsSource = viewSource;
+            }
+        }
+
+        private void find_request_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            string filter = t.Text;
+            ICollectionView viewSource = CollectionViewSource.GetDefaultView(customers_table.ItemsSource);
+            if (filter == "") viewSource.Filter = null;
+            else
+            {
+                viewSource.Filter = o =>
+                {
+                    DB_Connections.Entities.Request p = o as DB_Connections.Entities.Request;
+                    return p.date_time_start.ToString().Contains(filter);
+                };
+                request_table.ItemsSource = viewSource;
+            }
+
+        }
     }
 
 }
