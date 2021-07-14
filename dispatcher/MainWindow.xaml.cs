@@ -42,8 +42,12 @@ namespace dispatcher
 
         private void save_customer(object sender, RoutedEventArgs e)
         {
-            var index = new win_save_customer();
-            index.ShowDialog();
+            var updateCustomerDialog = new win_save_customer(baseCustomersRepository.GetById(1)); // id получить из таблицы)
+
+            updateCustomerDialog.ShowDialog();
+
+            baseCustomersRepository.Update(updateCustomerDialog.UpdatingCustomer);
+
             customers_table.ItemsSource = baseCustomersRepository.GetCustomers();
         }
 
@@ -59,7 +63,14 @@ namespace dispatcher
             //}
 
             //customers_table.ItemsSource = all_customers;
-            customers_table.ItemsSource = baseCustomersRepository.GetCustomers();
+            var actualCustomers =  baseCustomersRepository.GetCustomers();
+
+            customers_table.ItemsSource = actualCustomers;
+
+            foreach (Customer customer in actualCustomers)
+            {
+                Console.WriteLine(customer);
+            }
         }
 
         private void del_customer(object sender, RoutedEventArgs e)
