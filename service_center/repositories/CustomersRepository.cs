@@ -13,7 +13,7 @@ namespace service_center.repositories
 
         public CustomersRepository()
         {
-            CustomerList.Add(new Customer(1, "Al", "eng", DateTime.Now, "koko", 80808));
+            CustomerList.Add(new Customer(1, "Al La", "eng", DateTime.Now, "koko", 80808));
             CustomerList.Add(new Customer(2, "Bl", "man", DateTime.Now, "kiko", 88808));
             CustomerList.Add(new Customer(3, "Cl", "eng", DateTime.Now, "keko", 80888));
             CustomerList.Add(new Customer(4, "Dl", "dir", DateTime.Now, "kvko", 80800));
@@ -40,6 +40,11 @@ namespace service_center.repositories
         public Customer[] GetCustomers()
         {
             return CustomerList.ToArray();
+        }
+
+        public int GetId(int currentRow)
+        {
+            return CustomerList[currentRow].id_cus;
         }
 
         public void Update(Customer ch_customer)

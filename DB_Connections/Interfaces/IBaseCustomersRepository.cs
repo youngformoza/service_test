@@ -16,5 +16,7 @@ namespace DB_Connections.Interfaces
         void Update(Customer ch_customer);
 
         void Delete(Customer ch_customer);
+
+        int GetId(int currentRow);
     }
 }
