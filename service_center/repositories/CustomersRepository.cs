@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DB_Connections.Entities;
 using DB_Connections.Interfaces;
@@ -22,45 +23,33 @@ namespace service_center.repositories
         public void AddCustomer(Customer new_customer)
         {
             int id = CustomerList.Count + 1;
-            CustomerList.Add(new Customer(id, new_customer.name, new_customer.position_cus, DateTime.Now, new_customer.mail, new_customer.phone));
-            //customer_list.Insert(id - 1, new customer(id, customer.name, customer.position_cus, DateTime.Now, customer.mail, customer.phone));
 
-            foreach (Customer customer in CustomerList)
-            {
-                Console.WriteLine(customer);
-            }
+            CustomerList.Add(new Customer(id, new_customer.name, new_customer.position_cus, DateTime.Now, new_customer.mail, new_customer.phone));
         }
 
         public void Delete(Customer ch_customer)
         {
             CustomerList.Remove(ch_customer);
-            foreach (Customer customer in CustomerList)
-            {
-                Console.WriteLine(customer);
-            }
         }
 
         public Customer GetById(int id)
         {
-            Customer ch_customer = CustomerList.Find(item => item.id_cus == id);
-
-            return ch_customer;
+            return CustomerList.SingleOrDefault(item => item.id_cus == id);
         }
 
         public Customer[] GetCustomers()
         {
-           /* foreach (customer ch_customer in customer_list)
-            {
-                Console.WriteLine(ch_customer);
-            }*/
             return CustomerList.ToArray();
         }
 
         public void Update(Customer ch_customer)
         {
-            CustomerList.
-                FindAll(item => item.id_cus == ch_customer.id_cus).
-                ForEach(x => { x.name = ch_customer.name; x.position_cus = ch_customer.position_cus; x.mail = ch_customer.mail; x.phone = ch_customer.phone; } );
+            var customerToUpdate = GetById(ch_customer.id_cus);
+
+            customerToUpdate.name = ch_customer.name;
+            customerToUpdate.position_cus = ch_customer.position_cus;
+            customerToUpdate.mail = ch_customer.mail;
+            customerToUpdate.phone = ch_customer.phone;
         }
     }
 }
