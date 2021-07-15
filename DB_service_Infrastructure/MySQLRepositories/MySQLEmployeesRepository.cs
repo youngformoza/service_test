@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DB_service_Infrastructure.MySQLRepositories
 {
-    class MySQLEmployeesRepository
+    public class MySQLEmployeesRepository : IBaseEmployeesRepository
     {
         protected string ConnectionString { get; set; }
 
@@ -18,7 +18,7 @@ namespace DB_service_Infrastructure.MySQLRepositories
         }
 
 
-        public employees GetByName(string name)
+        public employees GetById(int id)
         {
             employees ChEmployee = null;
 
@@ -28,15 +28,18 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 connection.Open();
 
-                using var command = new MySqlCommand("SELECT id_empl, name, qualification, id_position, position.name FROM employees JOIN positions ON employees.id_position = positions.id_pos WHERE name = @name", connection);
+                using var command = new MySqlCommand("SELECT id_empl, employees.`name`, qualification, id_position, position.name FROM employees " +
+                    "JOIN position ON employees.id_position = position.id_pos " +
+                    "WHERE id_empl = @id", connection);
 
-                command.Parameters.AddWithValue("name", name);
+                command.Parameters.AddWithValue("id", id);
 
                 using var reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    ChEmployee = new employees(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), new positions(reader.GetInt32(3), reader.GetString(4)));
+                    ChEmployee = new employees(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), 
+                        new positions(reader.GetInt32(3), reader.GetString(4)));
                 }
             }
             catch (Exception ex)

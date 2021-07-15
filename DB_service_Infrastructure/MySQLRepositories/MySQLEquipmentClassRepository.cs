@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DB_service_Infrastructure.MySQLRepositories
 {
-    class MySQLEquipmentClassRepository
+    public class MySQLEquipmentClassRepository : IBaseEquipmentClassRepository
     {
         protected string ConnectionString { get; set; }
 
@@ -28,7 +28,8 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 connection.Open();
 
-                using var command = new MySqlCommand("SELECT id_eq_cl, name FROM equipment_class WHERE name = @name", connection);
+                using var command = new MySqlCommand("SELECT id_eq_cl, name FROM equipment_class " +
+                    "WHERE name = @name", connection);
 
                 command.Parameters.AddWithValue("name", name);
 

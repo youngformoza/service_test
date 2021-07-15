@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DB_service_Infrastructure.MySQLRepositories
 {
-    class MySQLStatusRepository
+    public class MySQLStatusRepository : IBaseStatusRepository
     {
         protected string ConnectionString { get; set; }
 

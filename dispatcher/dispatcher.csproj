@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DB_Connections\DB_Connections.csproj" />
+    <ProjectReference Include="..\DB_service_Infrastructure\DB_service_Infrastructure.csproj" />
     <ProjectReference Include="..\service_center\service_center.csproj" />
   </ItemGroup>
 

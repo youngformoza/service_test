@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DB_service_Infrastructure.MySQLRepositories
 {
-    class MySQLPositionsRepository
+    public class MySQLPositionsRepository : IBasePositionRepository
     {
         protected string ConnectionString { get; set; }
 
@@ -18,7 +18,7 @@ namespace DB_service_Infrastructure.MySQLRepositories
         }
         
 
-        public positions GetById(int id)
+        public positions GetByName(string name)
         {
             positions ChPosition = null;
 
@@ -28,9 +28,9 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 connection.Open();
 
-                using var command = new MySqlCommand("SELECT id, name FROM positions WHERE id_pos = @id", connection);
+                using var command = new MySqlCommand("SELECT id_pos, name FROM positions WHERE name = @name", connection);
 
-                command.Parameters.AddWithValue("id", id);
+                command.Parameters.AddWithValue("name", name);
 
                 using var reader = command.ExecuteReader();
 

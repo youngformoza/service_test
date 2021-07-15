@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DB_service_Infrastructure.MySQLRepositories
 {
-    class MySQLCustomersRepository
+    public class MySQLCustomersRepository : IBaseCustomersRepository
     {
         protected string ConnectionString { get; set; }
 
@@ -15,7 +15,6 @@ namespace DB_service_Infrastructure.MySQLRepositories
         {
             ConnectionString = "server=localhost;user=root;database=service_center;port=3306;password=2907Yu1909Ya";
         }
-
 
         public Customer[] GetCustomers()
         {
@@ -33,7 +32,7 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 while (reader.Read())
                 {
-                    customers.Add(new Customer(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3), reader.GetString(4), reader.GetInt32(5)));
+                    customers.Add(new Customer(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3), reader.GetString(4), reader.GetInt64(5)));
                 }
             }
             catch (Exception ex)
@@ -43,6 +42,7 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
             return customers.ToArray();
         }
+
 
         public Customer GetById(int id)
         {
@@ -62,7 +62,7 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 while (reader.Read())
                 {
-                    ChCustomer = new Customer(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3), reader.GetString(4), reader.GetInt32(5));
+                    ChCustomer = new Customer(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3), reader.GetString(4), reader.GetInt64(5));
                 }
             }
             catch (Exception ex)
@@ -73,7 +73,7 @@ namespace DB_service_Infrastructure.MySQLRepositories
             return ChCustomer;
         }
 
-        public Customer AddCustomer(Customer NewCustomer)
+        public void AddCustomer(Customer NewCustomer)
         {
             try
             {
@@ -99,10 +99,10 @@ namespace DB_service_Infrastructure.MySQLRepositories
                 Console.WriteLine(ex.Message);
             }
 
-            return NewCustomer;
+            //return NewCustomer;
         }
 
-        public Customer Update(Customer UpdatingCustomer)
+        public void Update(Customer UpdatingCustomer)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace DB_service_Infrastructure.MySQLRepositories
                 connection.Open();
 
                 using var command = new MySqlCommand("UPDATE customers SET `name` = @name, position = @position, birthday = @birthday, " +
-                    "mail = @mail, phone = @phone WHERE product_id = @id;", connection);
+                    "mail = @mail, phone = @phone WHERE id_cus = @id;", connection);
 
                 command.Parameters.AddWithValue("id", UpdatingCustomer.id_cus);
                 command.Parameters.AddWithValue("name", UpdatingCustomer.name);
@@ -128,7 +128,7 @@ namespace DB_service_Infrastructure.MySQLRepositories
                 Console.WriteLine(ex.Message);
             }
 
-            return UpdatingCustomer;
+            //return UpdatingCustomer;
         }
 
         public void Delete(Customer DeletingCustomer)
@@ -150,6 +150,13 @@ namespace DB_service_Infrastructure.MySQLRepositories
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public int GetId(int currentRow)
+        {
+            var allCustomers = new List<Customer>(GetCustomers());
+
+            return allCustomers[currentRow].id_cus;
         }
     }
 }

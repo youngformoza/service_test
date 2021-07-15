@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "service_center", "service_c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dispatcher", "..\dispatcher\dispatcher.csproj", "{D91515A1-9EF8-4035-9915-2D668EB4820D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB_Connections", "..\DB_Connections\DB_Connections.csproj", "{12ABECA7-0530-4965-8E73-60AB06EAAADF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB_Connections", "..\DB_Connections\DB_Connections.csproj", "{12ABECA7-0530-4965-8E73-60AB06EAAADF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB_service_Infrastructure", "..\DB_service_Infrastructure\DB_service_Infrastructure.csproj", "{7EC5F65B-51C2-4EF8-B57E-D2A1BA804B4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{12ABECA7-0530-4965-8E73-60AB06EAAADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12ABECA7-0530-4965-8E73-60AB06EAAADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12ABECA7-0530-4965-8E73-60AB06EAAADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EC5F65B-51C2-4EF8-B57E-D2A1BA804B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EC5F65B-51C2-4EF8-B57E-D2A1BA804B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EC5F65B-51C2-4EF8-B57E-D2A1BA804B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EC5F65B-51C2-4EF8-B57E-D2A1BA804B4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
