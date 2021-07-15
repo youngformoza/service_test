@@ -9,6 +9,8 @@ namespace DB_Connections.Interfaces
     {
         Request[] GetRequests();
 
+        Request[] GetAllRequestsForCustomer(int idCustomer);
+
         Request GetById(int id);
 
         int GetId(int currentRow);

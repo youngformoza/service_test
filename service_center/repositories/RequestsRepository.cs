@@ -6,7 +6,7 @@ using DB_Connections.Interfaces;
 
 namespace service_center.repositories
 {
-    public class RequestsRepository : IBaseRequestsRepository
+    public class RequestsRepository  : IBaseRequestsRepository
     {
         public List<Request> RequestList = new List<Request>();
 
@@ -58,5 +58,9 @@ namespace service_center.repositories
             return RequestList[currentRow].id_req;
         }
 
+        public Request[] GetAllRequestsForCustomer(int idCustomer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
