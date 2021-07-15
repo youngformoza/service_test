@@ -42,7 +42,7 @@ namespace dispatcher.Customers
             UpdatingCustomer.mail = customer_mail.Text;
 
             if (int.TryParse(customer_phone.Text, out var number))
-                UpdatingCustomer.phone = number;
+                   UpdatingCustomer.phone = number;
 
             UpdatingCustomer.birthday = bd_customer.SelectedDate.Value;
 

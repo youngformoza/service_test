@@ -27,16 +27,20 @@ namespace dispatcher.Request
         public string ChEquipmentService;
         public string ChEquipmentStatus;
 
-        public win_save_request()
+        public win_save_request(DB_Connections.Entities.Request request)
         {
+            UpdatingRequest = request;
             InitializeComponent();
+
+            urgency.Text = UpdatingRequest.urgency;
+            equipment_series.Text = UpdatingRequest.eq.series;
+            service.Text = UpdatingRequest.ser.name;
+            status.Text = UpdatingRequest.stat.name;
+
         }
 
         private void Apply_save_request(object sender, RoutedEventArgs e)
         {
-            UpdatingRequest = new DB_Connections.Entities.Request(DateTime.Now, "0", null, null, null, null);
-
-            UpdatingRequest.date_time_start = DateTime.Now;
             UpdatingRequest.urgency = urgency.Text;
 
             ChEquipmentSeries = equipment_series.Text;
