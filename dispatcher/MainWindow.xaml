@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dispatcher"
         mc:Ignorable="d"
-        Title="Service center" Height="616" Width="1000" ResizeMode="CanResizeWithGrip" SizeToContent="WidthAndHeight" VerticalAlignment="Stretch">
-    <Grid Height="616">
-        <Menu Height="25" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" Margin="0,0,0,0">
+        Title="Service center" Height="700" Width="1000" ResizeMode="CanResizeWithGrip" SizeToContent="WidthAndHeight" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="600" MinHeight="300">
+    <Grid Background="#72BAF0F6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="426*"/>
+            <ColumnDefinition Width="201*"/>
+            <ColumnDefinition Width="373*"/>
+        </Grid.ColumnDefinitions>
+        <Menu HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top"  Height="20" VerticalAlignment="Top" Background="White" Grid.ColumnSpan="3" >
             <MenuItem Header="Клиент">
                 <MenuItem Header="Изменить" Click="save_customer"/>
                 <MenuItem Header="Добавить нового..." Click="add_customer"/>
@@ -19,12 +24,34 @@
                 <MenuItem Header="Добавить новый..." Click="add_request"/>
             </MenuItem>
         </Menu>
-        <TextBox x:Name="find_customer" Margin="10,30,577,563" TextWrapping="Wrap" TextChanged="find_customer_TextChanged"/>
-        <DataGrid Margin="10,53,978,42" x:Name="customers_table" AutoGenerateColumns="True"
-          AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:FieldModifier="public" SelectedIndex="0" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single" />
-        <TextBox x:Name="find_request" Margin="622,30,10,563" TextWrapping="Wrap" TextChanged="find_request_TextChanged"/>
-        <DataGrid Margin="622,53,8,42" x:Name="request_table" HorizontalContentAlignment="Stretch" SelectedIndex="0" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:FieldModifier="public" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single">
-        </DataGrid>
 
+
+
+        <Border Margin="10,25,3,28" Grid.Column="0">
+            <StackPanel VerticalAlignment="Stretch">
+                <TextBox x:Name="find_customer" TextChanged="find_customer_TextChanged" VerticalAlignment="Top"/>
+                <DataGrid x:Name="customers_table" AutoGenerateColumns="True"
+          AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:FieldModifier="public" SelectedIndex="0" CanUserAddRows="False" 
+                  CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" />
+            </StackPanel>
+        </Border>
+
+
+        <Border Margin="423,20,10,28" Grid.ColumnSpan="2" >
+            <StackPanel>
+
+            </StackPanel>
+        </Border>
+
+        <Border Margin="196,25,10,28" Grid.Column="1" Grid.ColumnSpan="2" >
+            <StackPanel>
+                <TextBox x:Name="find_request" TextChanged="find_request_TextChanged" VerticalAlignment="Top"/>
+                <DataGrid x:Name="request_table" HorizontalContentAlignment="Stretch" SelectedIndex="0" 
+                      AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:FieldModifier="public" CanUserAddRows="False" 
+                     CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single" VerticalAlignment="Top"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
+
+    
