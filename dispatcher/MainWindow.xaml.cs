@@ -87,34 +87,7 @@ namespace dispatcher
             baseCustomersRepository.Delete(ChCus);
             customers_table.ItemsSource = baseCustomersRepository.GetCustomers();
         }
-
-        private void show_customers_requests(object sender, RoutedEventArgs e)
-        {
-            var chosenId = baseCustomersRepository.GetId(customers_table.SelectedIndex);
-
-            //request_table.ItemsSource = baseRequestRepository.GetAllRequestsForCustomer(chosenId);
-            var allRequests = new List<DB_Connections.Entities.Request>(baseRequestRepository.GetAllRequestsForCustomer(chosenId));
-
-            int count = allRequests.Count();
-
-           // List<ViewModelRequests> viewModelRequestsList = new List<ViewModelRequests>();
-            List<ViewModelRequests> viewModelRequestsList = Enumerable.Repeat(new ViewModelRequests(0, null, null, null, null, null, DateTime.Now, DateTime.Now), count).ToList();
-
-            for (int row = 0; row < allRequests.Count(); row++)
-            {
-                viewModelRequestsList[row].id = allRequests[row].id_req;
-                viewModelRequestsList[row].equipment = allRequests[row].eq.series;
-                viewModelRequestsList[row].service = allRequests[row].ser.name;
-                viewModelRequestsList[row].urgency = allRequests[row].urgency;
-                viewModelRequestsList[row].engineer = allRequests[row].eng.name;
-                viewModelRequestsList[row].status = allRequests[row].stat.name;
-                viewModelRequestsList[row].date_time_start = allRequests[row].date_time_start;
-                viewModelRequestsList[row].date_time_end = allRequests[row].date_time_end;
-            }
-
-            request_table.ItemsSource = viewModelRequestsList;
-        }
-
+        
         private void save_request(object sender, RoutedEventArgs e)
         {
             var chosenIdRequest = baseRequestRepository.GetId(request_table.SelectedIndex);
@@ -205,8 +178,8 @@ namespace dispatcher
                 {
                     viewSource.Filter = o =>
                     {
-                        DB_Connections.Entities.Request p = o as DB_Connections.Entities.Request;
-                        return p.date_time_start.ToString().Contains(filter);
+                        ViewModelRequests p = o as ViewModelRequests;
+                        return p.date_time_start.Date.ToString().Contains(filter);
                     };
                     request_table.ItemsSource = viewSource;
                 }
@@ -215,6 +188,32 @@ namespace dispatcher
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private void customers_table_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var chosenId = baseCustomersRepository.GetId(customers_table.SelectedIndex);
+
+            //request_table.ItemsSource = baseRequestRepository.GetAllRequestsForCustomer(chosenId);
+            var allRequests = new List<DB_Connections.Entities.Request>(baseRequestRepository.GetAllRequestsForCustomer(chosenId));
+
+            List<ViewModelRequests> viewModelRequestsList = new List<ViewModelRequests>();
+            //List<ViewModelRequests> viewModelRequestsList = Enumerable.Repeat(new ViewModelRequests(0, null, null, null, null, null, DateTime.Now, DateTime.Now), count).ToList();
+
+            for (int row = 0; row < allRequests.Count(); row++)
+            {
+                string engineer;
+
+                if (allRequests[row].eng == null)
+                    engineer = null;
+                else
+                    engineer = allRequests[row].eng.name;
+
+                viewModelRequestsList.Add(new ViewModelRequests(allRequests[row].id_req, allRequests[row].eq.series, allRequests[row].ser.name, allRequests[row].urgency, engineer, allRequests[row].stat.name,
+                    allRequests[row].date_time_start, allRequests[row].date_time_end));
+            }
+
+            request_table.ItemsSource = viewModelRequestsList;
         }
 
         public class ViewModelRequests
@@ -241,9 +240,9 @@ namespace dispatcher
             public DateTime date_time_start { get; set; }
 
             [DisplayName("Дата завершения")]
-            public DateTime date_time_end { get; set; }
+            public DateTime? date_time_end { get; set; }
 
-            public ViewModelRequests(int id, string equipment, string service, string urgency, string engineer, string status, DateTime date_time_start, DateTime date_time_end)
+            public ViewModelRequests(int id, string equipment, string service, string urgency, string engineer, string status, DateTime date_time_start, DateTime? date_time_end)
             {
                 this.id = id;
                 this.equipment = equipment;

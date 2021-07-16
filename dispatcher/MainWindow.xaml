@@ -17,7 +17,6 @@
                 <MenuItem Header="Изменить" Click="save_customer"/>
                 <MenuItem Header="Добавить нового..." Click="add_customer"/>
                 <MenuItem Header="Удалить" Click="del_customer"/>
-                <MenuItem Header="Показать заказы для клиента" Click="show_customers_requests"/>
             </MenuItem>
             <MenuItem Header="Заказ">
                 <MenuItem Header="Изменить" Click="save_request"/>
@@ -32,7 +31,7 @@
                 <TextBox x:Name="find_customer" TextChanged="find_customer_TextChanged" VerticalAlignment="Top"/>
                 <DataGrid x:Name="customers_table" AutoGenerateColumns="True"
           AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:FieldModifier="public" SelectedIndex="0" CanUserAddRows="False" 
-                  CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" />
+                  CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" SelectionChanged="customers_table_SelectionChanged" />
             </StackPanel>
         </Border>
 
