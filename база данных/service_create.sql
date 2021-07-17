@@ -38,7 +38,7 @@ CREATE TABLE `status` (
 
 CREATE TABLE equipment (
     id_eq INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    series VARCHAR(5) NOT NULL,
+    model VARCHAR(5) NOT NULL,
     id_class INT UNSIGNED NOT NULL,
     CONSTRAINT fk_equipment_class_id FOREIGN KEY (id_class)
 		REFERENCES equipment_class (id_eq_cl),
@@ -82,6 +82,7 @@ CREATE TABLE requests (
 	date_time_start DATETIME NOT NULL,
     date_time_end DATETIME,
     urgency VARCHAR(20) NOT NULL,
+    series VARCHAR(45) NOT NULL,
     id_customer INT UNSIGNED NOT NULL,
     CONSTRAINT fk_requests_customers_id FOREIGN KEY (id_customer)
 		REFERENCES customers (id_cus),

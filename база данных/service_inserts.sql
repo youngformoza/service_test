@@ -21,7 +21,7 @@ INSERT INTO equipment_class (`name`) VALUES
 ('SCX'),
 ('SF');
 
-INSERT INTO equipment (series, id_class, id_vendor) VALUES
+INSERT INTO equipment (model, id_class, id_vendor) VALUES
 ('3025', 4, 5),
 ('C8130', 2, 1),
 ('B8145', 2, 1),
@@ -82,11 +82,11 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-INSERT INTO requests (date_time_start, date_time_end, urgency, id_customer, id_equipment, id_service, id_employee_reception, id_employee_engineer, id_status) VALUES
-('20200225134040', '20200302152020', 'обычная', 2, 2, 1, 1, 6, 4),
-('20210628154000', null, 'обычная', 1, 4, 2, 8, 7, 3),
-('20200301130040', '20200303152020', 'высокая', 5, 3, 3, 1, 2, 4),
-('20210708154000', null, 'высокая', 7, 9, 1, 8, 10, 1);
+INSERT INTO requests (date_time_start, date_time_end, urgency, series, id_customer, id_equipment, id_service, id_employee_reception, id_employee_engineer, id_status) VALUES
+('20200225134040', '20200302152020', 'обычная', 4874515488, 2, 2, 1, 1, 6, 4),
+('20210628154000', null, 'обычная', 74512584, 1, 4, 2, 8, 7, 3),
+('20200301130040', '20200303152020', 'высокая', 45454678, 5, 3, 3, 1, 2, 4),
+('20210708154000', null, 'высокая', 25843548, 7, 9, 1, 8, 10, 1);
 
 INSERT INTO invoices (date_time_start, date_time_end, note, id_employee_engineer, id_employee_provider,  id_status) VALUES
 ('20200226204040', '20200228152020',null, 6, 3, 4),
