@@ -47,5 +47,32 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
             return ChEqCl;
         }
+
+        public equipment_class[] GetAllClasses()
+        {
+            var classes = new List<equipment_class>();
+
+            try
+            {
+                using var connection = new MySqlConnection(ConnectionString);
+
+                connection.Open();
+
+                using var command = new MySqlCommand("SELECT id_eq_cl, name FROM equipment_class; ", connection);
+
+                using var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    classes.Add(new equipment_class(reader.GetInt32(0), reader.GetString(1)));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return classes.ToArray();
+        }
     }
 }

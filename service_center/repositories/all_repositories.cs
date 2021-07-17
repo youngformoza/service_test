@@ -41,6 +41,12 @@ namespace service_center.repositories
             status_list.Add(new status(4, "Dl"));
             status_list.Add(new status(5, "El"));
         }
+
+        public status[] GetAllStatuses()
+        {
+            return status_list.ToArray();
+        }
+
         public status GetByName(string name)
         {
             status ch_status = status_list.Find(item => item.name == name);
@@ -60,6 +66,12 @@ namespace service_center.repositories
             services_list.Add(new services(4, "D"));
             services_list.Add(new services(5, "E"));
         }
+
+        public services[] GetAllServices()
+        {
+            return services_list.ToArray();
+        }
+
         public services GetByName(string name)
         {
             services ch_service = services_list.Find(item => item.name == name);
@@ -101,6 +113,12 @@ namespace service_center.repositories
             equipment_class_list.Add(new equipment_class(4, "Dl"));
             equipment_class_list.Add(new equipment_class(5, "El"));
         }
+
+        public equipment_class[] GetAllClasses()
+        {
+            return equipment_class_list.ToArray();
+        }
+
         public equipment_class GetByName(string name)
         {
             equipment_class ch_equipment_class = equipment_class_list.Find(item => item.name == name);
@@ -111,18 +129,28 @@ namespace service_center.repositories
 
     public class equipment_repository : IBaseEquipmentRepository
     {
-        /*
-        public List<equipment> equipment_list = new List<equipment>();
-
-
-        public equipment_repository()
+        public equipment[] GetAllEquipment()
         {
-            equipment_list.Add(new equipment(1, "Al"));
-            equipment_list.Add(new equipment(2, "Bl"));
-            equipment_list.Add(new equipment(3, "Cl"));
-            equipment_list.Add(new equipment(4, "Dl"));
-            equipment_list.Add(new equipment(5, "El"));
-        }*/
+            throw new NotImplementedException();
+        }
+
+        public equipment[] GetAllEquipmnetForClass(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*
+public List<equipment> equipment_list = new List<equipment>();
+
+
+public equipment_repository()
+{
+   equipment_list.Add(new equipment(1, "Al"));
+   equipment_list.Add(new equipment(2, "Bl"));
+   equipment_list.Add(new equipment(3, "Cl"));
+   equipment_list.Add(new equipment(4, "Dl"));
+   equipment_list.Add(new equipment(5, "El"));
+}*/
         public equipment GetByName(string name)
         {
             throw new NotImplementedException();

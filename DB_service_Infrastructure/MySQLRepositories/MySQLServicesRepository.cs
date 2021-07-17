@@ -46,5 +46,32 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
             return ChService;
         }
+
+        public services[] GetAllServices()
+        {
+            var servicesList = new List<services>();
+
+            try
+            {
+                using var connection = new MySqlConnection(ConnectionString);
+
+                connection.Open();
+
+                using var command = new MySqlCommand("SELECT id_ser, name FROM services; ", connection);
+
+                using var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    servicesList.Add(new services(reader.GetInt32(0), reader.GetString(1)));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return servicesList.ToArray();
+        }
     }
 }

@@ -47,5 +47,31 @@ namespace DB_service_Infrastructure.MySQLRepositories
             return ChStatus;
         }
 
+        public status[] GetAllStatuses()
+        {
+            var statusList = new List<status>();
+
+            try
+            {
+                using var connection = new MySqlConnection(ConnectionString);
+
+                connection.Open();
+
+                using var command = new MySqlCommand("SELECT id_stat, name FROM status; ", connection);
+
+                using var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    statusList.Add(new status(reader.GetInt32(0), reader.GetString(1)));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return statusList.ToArray();
+        }
     }
 }
