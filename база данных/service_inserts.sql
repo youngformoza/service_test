@@ -83,10 +83,10 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
 INSERT INTO requests (date_time_start, date_time_end, urgency, series, id_customer, id_equipment, id_service, id_employee_reception, id_employee_engineer, id_status) VALUES
-('20200225134040', '20200302152020', 'обычная', 4874515488, 2, 2, 1, 1, 6, 4),
-('20210628154000', null, 'обычная', 74512584, 1, 4, 2, 8, 7, 3),
-('20200301130040', '20200303152020', 'высокая', 45454678, 5, 3, 3, 1, 2, 4),
-('20210708154000', null, 'высокая', 25843548, 7, 9, 1, 8, 10, 1);
+('20200225134040', '20200302152020', 'обычный', 4874515488, 2, 2, 1, 1, 6, 4),
+('20210628154000', null, 'обычный', 74512584, 1, 4, 2, 8, 7, 3),
+('20200301130040', '20200303152020', 'высокий', 45454678, 5, 3, 3, 1, 2, 4),
+('20210708154000', null, 'высокий', 25843548, 7, 9, 1, 8, 10, 1);
 
 INSERT INTO invoices (date_time_start, date_time_end, note, id_employee_engineer, id_employee_provider,  id_status) VALUES
 ('20200226204040', '20200228152020',null, 6, 3, 4),
@@ -99,3 +99,4 @@ INSERT INTO detail_to_invoice (id_detail, id_invoice, quantity) VALUES
 (3, 2, 5),
 (4, 1, 2), 
 (2, 4, 3);
+
