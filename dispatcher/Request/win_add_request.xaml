@@ -5,15 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dispatcher.Request"
         mc:Ignorable="d"
-        Title="win_add_request" Height="450" Width="400">
-    <Grid>
-        <Label Content="Оборудование (серия)" HorizontalAlignment="Left" Margin="66,35,0,0" VerticalAlignment="Top" Height="35" Width="268"/>
-        <TextBox x:Name="equipment_series" HorizontalAlignment="Left" Margin="66,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
-        <Label Content="Услуга" HorizontalAlignment="Left" Margin="66,105,0,0" VerticalAlignment="Top" Height="35" Width="268"/>
-        <TextBox x:Name="service" HorizontalAlignment="Left" Margin="66,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
-        <Label Content="Уровень срочности" HorizontalAlignment="Left" Margin="66,175,0,0" VerticalAlignment="Top" Height="44" Width="268"/>
-        <TextBox x:Name="urgency" HorizontalAlignment="Left" Margin="66,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
-        <Button Content="Добавить" HorizontalAlignment="Left" Margin="134,260,0,0" VerticalAlignment="Top" Height="32" Width="132" Click="Apply_add_request"/>
-        
+        Title="win_add_request" Height="450" Width="800">
+    <Grid Height="440">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="286*"/>
+            <ColumnDefinition Width="115*"/>
+            <ColumnDefinition Width="399*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="1">
+            <StackPanel>
+                <Label Height="30"/>
+                <Label Content="Выберите класс оборудования:" Width="268"/>
+                <ComboBox x:Name="equipment_class" Width="268"
+                          SelectionChanged="equipment_class_SelectionChanged"/>
+                <Label Height="10" />
+                <Label Content="Оборудование (серия)" Height="35" Width="268"/>
+                <TextBox x:Name="equipment_series"  TextWrapping="Wrap" Width="268" Height="26"/>
+                <Label Content="Услуга" Height="35" Width="268"/>
+                <ComboBox x:Name="service" Width="268"/>
+                <Label Content="Уровень срочности" Height="44" Width="268"/>
+                <ComboBox x:Name="urgency"  Width="268" Height="26"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="2" >
+            <StackPanel>
+                <TextBox x:Name="find_equipmment" TextChanged="find_equipment_TextChanged" VerticalAlignment="Top"/>
+                <DataGrid x:Name="equipment_table" HorizontalContentAlignment="Stretch" SelectedIndex="0" 
+                      AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" x:FieldModifier="public" CanUserAddRows="False" 
+                      CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True" SelectionMode="Single" VerticalAlignment="Top"/>
+            </StackPanel>
+        </Border>
+
+        <Button Content="Добавить" HorizontalAlignment="Left" Margin="109,373,0,0" VerticalAlignment="Top" Height="32" Width="132" Click="Apply_add_request"/>
+
     </Grid>
 </Window>

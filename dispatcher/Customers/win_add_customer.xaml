@@ -13,7 +13,7 @@
         <TextBox x:Name="customer_position" HorizontalAlignment="Center" Margin="0,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
         <Label Content="Почта" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Height="44" Width="268"/>
         <TextBox x:Name="customer_mail" HorizontalAlignment="Center" Margin="0,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
-        <Label Content="Номер телефона" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Height="44" Width="268"/>
+        <Label Content="Номер телефона (формат: 79005557711)" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Height="44" Width="268"/>
         <TextBox x:Name="customer_phone" HorizontalAlignment="Center" Margin="0,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268" Height="26"/>
         <Button Content="Добавить" HorizontalAlignment="Center" Margin="0,360,0,0" VerticalAlignment="Top" Height="32" Width="132" Click="Apply_add_customer"/>
         <Label Content="День рождения" HorizontalAlignment="Left" Margin="68,315,0,0" VerticalAlignment="Top" Height="44" Width="132"/>
