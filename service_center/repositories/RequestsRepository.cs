@@ -30,7 +30,7 @@ namespace service_center.repositories
         public void AddRequest(Request new_request)
         {
             int id = RequestList.Count + 1;
-            RequestList.Add(new Request(id, new_request.date_time_start, new_request.urgency, new_request.cus, new_request.eq, new_request.ser, new_request.recep, new_request.stat));
+            RequestList.Add(new Request(id, new_request.date_time_start, new_request.urgency, new_request.series, new_request.cus, new_request.eq, new_request.ser, new_request.recep, new_request.stat));
         }
 
 
@@ -50,6 +50,7 @@ namespace service_center.repositories
 
             requestToUpdate.ser = ch_request.ser;
             requestToUpdate.stat = ch_request.stat;
+            requestToUpdate.series = ch_request.series;
 
         }
 

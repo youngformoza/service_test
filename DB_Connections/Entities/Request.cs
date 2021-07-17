@@ -10,9 +10,11 @@ namespace DB_Connections.Entities
 
         public DateTime date_time_start { get; set; }
 
-        public DateTime date_time_end { get; set; }
+        public DateTime? date_time_end { get; set; }
 
         public string urgency { get; set; }
+
+        public string series { get; set; }
 
         public Customer cus { get; set; }
 
@@ -26,12 +28,13 @@ namespace DB_Connections.Entities
 
         public status stat { get; set; }
 
-        public Request(int id_req, DateTime date_time_start, DateTime date_time_end, string urgency, Customer cus, equipment eq, services ser, employees recep, employees eng, status stat)
+        public Request(int id_req, DateTime date_time_start, DateTime? date_time_end, string urgency, string series, Customer cus, equipment eq, services ser, employees recep, employees eng, status stat)
         {
             this.id_req = id_req;
             this.date_time_start = date_time_start;
             this.date_time_end = date_time_end;
             this.urgency = urgency;
+            this.series = series;
             this.cus = cus;
             this.eq = eq;
             this.ser = ser;
@@ -40,10 +43,11 @@ namespace DB_Connections.Entities
             this.stat = stat;
         }
 
-        public Request(DateTime date_time_start, string urgency, Customer cus, equipment eq, services ser, employees recep, status stat)
+        public Request(DateTime date_time_start, string urgency, string series, Customer cus, equipment eq, services ser, employees recep, status stat)
         {
             this.date_time_start = date_time_start;
             this.urgency = urgency;
+            this.series = series;
             this.cus = cus;
             this.eq = eq;
             this.ser = ser;
@@ -51,11 +55,12 @@ namespace DB_Connections.Entities
             this.stat = stat;
         }
 
-        public Request(int id_req, DateTime date_time_start, string urgency, Customer cus, equipment eq, services ser, employees recep, status stat)
+        public Request(int id_req, DateTime date_time_start, string urgency, string series, Customer cus, equipment eq, services ser, employees recep, status stat)
         {
             this.id_req = id_req;
             this.date_time_start = date_time_start;
             this.urgency = urgency;
+            this.series = series;
             this.cus = cus;
             this.eq = eq;
             this.ser = ser;
@@ -63,10 +68,11 @@ namespace DB_Connections.Entities
             this.stat = stat;
         }
 
-        public Request(DateTime date_time_start, string urgency, equipment eq, services ser, employees recep, status stat)
+        public Request(DateTime date_time_start, string urgency, string series, equipment eq, services ser, employees recep, status stat)
         {
             this.date_time_start = date_time_start;
             this.urgency = urgency;
+            this.series = series;
             this.eq = eq;
             this.ser = ser;
             this.recep = recep;
@@ -75,7 +81,7 @@ namespace DB_Connections.Entities
 
         public override string ToString()
         {
-            return $"{id_req}, {date_time_start}, {date_time_end}, {urgency}, {cus}, {eq}, {ser}, {recep}, {eng}, {stat}";
+            return $"{id_req}, {date_time_start}, {date_time_end}, {urgency}, {series}, {cus}, {eq}, {ser}, {recep}, {eng}, {stat}";
         }
     }
 }

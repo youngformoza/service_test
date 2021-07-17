@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using DB_Connections.Entities;
 using DB_Connections.Interfaces;
@@ -28,9 +29,9 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 connection.Open();
 
-                using var command = new MySqlCommand("SELECT id_req, date_time_start, date_time_end, urgency, " +
+                using var command = new MySqlCommand("SELECT id_req, date_time_start, date_time_end, urgency, series," +
                     "id_customer, customers.`name`, customers.`position`, customers.birthday, customers.mail, customers.phone, " +
-                    "id_equipment, equipment.series, equipment.id_class, equipment_class.`name`, id_vendor, vendor.`name`, " +
+                    "id_equipment, equipment.model, equipment.id_class, equipment_class.`name`, id_vendor, vendor.`name`, " +
                     "id_service, services.`name`, " +
                     "id_employee_reception, reception.`name`, reception.qualification, reception.id_position, reception_position.`name`, " +
                     "id_employee_engineer, engineer.`name`, engineer.qualification, engineer.id_position, engineer_position.`name`, " +
@@ -43,21 +44,34 @@ namespace DB_service_Infrastructure.MySQLRepositories
                     "JOIN services ON requests.id_service = services.id_ser " +
                     "JOIN employees AS reception ON requests.id_employee_reception = reception.id_empl " +
                     "JOIN `position` AS reception_position ON reception.id_position = reception_position.id_pos " +
-                    "JOIN employees AS engineer ON requests.id_employee_engineer = engineer.id_empl " +
-                    "JOIN `position` AS engineer_position ON engineer.id_position = engineer_position.id_pos " +
+                    "LEFT JOIN employees AS engineer ON requests.id_employee_engineer = engineer.id_empl " +
+                    "LEFT JOIN `position` AS engineer_position ON engineer.id_position = engineer_position.id_pos " +
                     "JOIN `status` ON requests.id_status = `status`.id_stat;", connection);
 
                 using var reader = command.ExecuteReader();
 
+                DateTime? date_time_end;
+                employees engineer;
+
                 while (reader.Read())
                 {
-                    allRequests.Add(new Request(reader.GetInt32(0), reader.GetDateTime(1), reader.GetDateTime(2), reader.GetString(3), 
-                        new Customer(reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetDateTime(7), reader.GetString(8), reader.GetInt64(9)),
-                        new equipment(reader.GetInt32(10), reader.GetString(11), new equipment_class(reader.GetInt32(12), reader.GetString(13)), new vendor(reader.GetInt32(14), reader.GetString(15))),
-                        new services(reader.GetInt32(16), reader.GetString(17)),
-                        new employees(reader.GetInt32(18), reader.GetString(19), reader.GetString(20), new positions(reader.GetInt32(21), reader.GetString(22))),
-                        new employees(reader.GetInt32(23), reader.GetString(24), reader.GetString(25), new positions(reader.GetInt32(26), reader.GetString(27))),
-                        new status(reader.GetInt32(28), reader.GetString(29))));
+                    if (reader.IsDBNull(reader.GetOrdinal("date_time_end")))
+                        date_time_end = null;
+                    else
+                        date_time_end = reader.GetDateTime(2);
+
+                    if (reader.IsDBNull(reader.GetOrdinal("id_employee_engineer")))
+                        engineer = null;
+                    else
+                        engineer = new employees(reader.GetInt32(24), reader.GetString(25), reader.GetString(26), new positions(reader.GetInt32(27), reader.GetString(28)));
+
+                    allRequests.Add(new Request(reader.GetInt32(0), reader.GetDateTime(1), date_time_end, reader.GetString(3), reader.GetString(4),
+                        new Customer(reader.GetInt32(5), reader.GetString(6), reader.GetString(7), reader.GetDateTime(8), reader.GetString(9), reader.GetInt64(10)),
+                        new equipment(reader.GetInt32(11), reader.GetString(12), new equipment_class(reader.GetInt32(13), reader.GetString(14)), new vendor(reader.GetInt32(15), reader.GetString(16))),
+                        new services(reader.GetInt32(17), reader.GetString(18)),
+                        new employees(reader.GetInt32(19), reader.GetString(20), reader.GetString(21), new positions(reader.GetInt32(22), reader.GetString(23))),
+                        engineer,
+                        new status(reader.GetInt32(29), reader.GetString(30))));
                     
                 }
             }
@@ -79,9 +93,9 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 connection.Open();
 
-                using var command = new MySqlCommand("SELECT id_req, date_time_start, date_time_end, urgency, " +
+                using var command = new MySqlCommand("SELECT id_req, date_time_start, date_time_end, urgency, series," +
                     "id_customer, customers.`name`, customers.`position`, customers.birthday, customers.mail, customers.phone," +
-                    "id_equipment, equipment.series, equipment.id_class, equipment_class.`name`, id_vendor, vendor.`name`," +
+                    "id_equipment, equipment.model, equipment.id_class, equipment_class.`name`, id_vendor, vendor.`name`," +
                     "id_service, services.`name`," +
                     "id_employee_reception, reception.`name`, reception.qualification, reception.id_position, reception_position.`name`," +
                     "id_employee_engineer, engineer.`name`, engineer.qualification, engineer.id_position, engineer_position.`name`," +
@@ -94,8 +108,8 @@ namespace DB_service_Infrastructure.MySQLRepositories
                     "JOIN services ON requests.id_service = services.id_ser " +
                     "JOIN employees AS reception ON requests.id_employee_reception = reception.id_empl " +
                     "JOIN `position` AS reception_position ON reception.id_position = reception_position.id_pos " +
-                    "JOIN employees AS engineer ON requests.id_employee_engineer = engineer.id_empl " +
-                    "JOIN `position` AS engineer_position ON engineer.id_position = engineer_position.id_pos " +
+                    "LEFT JOIN employees AS engineer ON requests.id_employee_engineer = engineer.id_empl " +
+                    "LEFT JOIN `position` AS engineer_position ON engineer.id_position = engineer_position.id_pos " +
                     "JOIN `status` ON requests.id_status = `status`.id_stat " +
                     "WHERE id_customer = @id;", connection);
 
@@ -103,15 +117,28 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 using var reader = command.ExecuteReader();
 
+                DateTime? date_time_end;
+                employees engineer;
+
                 while (reader.Read())
                 {
-                    allRequests.Add(new Request(reader.GetInt32(0), reader.GetDateTime(1), reader.GetDateTime(2), reader.GetString(3),
-                        new Customer(reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetDateTime(7), reader.GetString(8), reader.GetInt64(9)),
-                        new equipment(reader.GetInt32(10), reader.GetString(11), new equipment_class(reader.GetInt32(12), reader.GetString(13)), new vendor(reader.GetInt32(14), reader.GetString(15))),
-                        new services(reader.GetInt32(16), reader.GetString(17)),
-                        new employees(reader.GetInt32(18), reader.GetString(19), reader.GetString(20), new positions(reader.GetInt32(21), reader.GetString(22))),
-                        new employees(reader.GetInt32(23), reader.GetString(24), reader.GetString(25), new positions(reader.GetInt32(26), reader.GetString(27))),
-                        new status(reader.GetInt32(28), reader.GetString(29))));
+                    if (reader.IsDBNull(reader.GetOrdinal("date_time_end")))
+                        date_time_end = null;
+                    else
+                        date_time_end = reader.GetDateTime(2);
+
+                    if (reader.IsDBNull(reader.GetOrdinal("id_employee_engineer")))
+                        engineer = null;
+                    else
+                        engineer = new employees(reader.GetInt32(24), reader.GetString(25), reader.GetString(26), new positions(reader.GetInt32(27), reader.GetString(28)));
+
+                    allRequests.Add(new Request(reader.GetInt32(0), reader.GetDateTime(1), date_time_end, reader.GetString(3), reader.GetString(4),
+                        new Customer(reader.GetInt32(5), reader.GetString(6), reader.GetString(7), reader.GetDateTime(8), reader.GetString(9), reader.GetInt64(10)),
+                        new equipment(reader.GetInt32(11), reader.GetString(12), new equipment_class(reader.GetInt32(13), reader.GetString(14)), new vendor(reader.GetInt32(15), reader.GetString(16))),
+                        new services(reader.GetInt32(17), reader.GetString(18)),
+                        new employees(reader.GetInt32(19), reader.GetString(20), reader.GetString(21), new positions(reader.GetInt32(22), reader.GetString(23))),
+                        engineer,
+                        new status(reader.GetInt32(29), reader.GetString(30))));
 
                 }
             }
@@ -133,9 +160,9 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 connection.Open();
 
-                using var command = new MySqlCommand("SELECT id_req, date_time_start, date_time_end, urgency, " +
+                using var command = new MySqlCommand("SELECT id_req, date_time_start, date_time_end, urgency, series, " +
                               "id_customer, customers.`name`, customers.`position`, customers.birthday, customers.mail, customers.phone," +
-                              "id_equipment, equipment.series, equipment.id_class, equipment_class.`name`, id_vendor, vendor.`name`," +
+                              "id_equipment, equipment.model, equipment.id_class, equipment_class.`name`, id_vendor, vendor.`name`," +
                               "id_service, services.`name`," +
                               "id_employee_reception, reception.`name`, reception.qualification, reception.id_position, reception_position.`name`," +
                               "id_employee_engineer, engineer.`name`, engineer.qualification, engineer.id_position, engineer_position.`name`," +
@@ -148,8 +175,8 @@ namespace DB_service_Infrastructure.MySQLRepositories
                               "JOIN services ON requests.id_service = services.id_ser " +
                               "JOIN employees AS reception ON requests.id_employee_reception = reception.id_empl " +
                               "JOIN `position` AS reception_position ON reception.id_position = reception_position.id_pos " +
-                              "JOIN employees AS engineer ON requests.id_employee_engineer = engineer.id_empl " +
-                              "JOIN `position` AS engineer_position ON engineer.id_position = engineer_position.id_pos " +
+                              "LEFT JOIN employees AS engineer ON requests.id_employee_engineer = engineer.id_empl " +
+                              "LEFT JOIN `position` AS engineer_position ON engineer.id_position = engineer_position.id_pos " +
                               "JOIN `status` ON requests.id_status = `status`.id_stat "+
                               "WHERE id_req = @id", connection);
 
@@ -157,15 +184,28 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 using var reader = command.ExecuteReader();
 
+                DateTime? date_time_end;
+                employees engineer;
+
                 while (reader.Read())
                 {
-                    ChRequest = new Request(reader.GetInt32(0), reader.GetDateTime(1), reader.GetDateTime(2), reader.GetString(3),
-                        new Customer(reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetDateTime(7), reader.GetString(8), reader.GetInt64(9)),
-                        new equipment(reader.GetInt32(10), reader.GetString(11), new equipment_class(reader.GetInt32(12), reader.GetString(13)), new vendor(reader.GetInt32(14), reader.GetString(15))),
-                        new services(reader.GetInt32(16), reader.GetString(17)),
-                        new employees(reader.GetInt32(18), reader.GetString(19), reader.GetString(20), new positions(reader.GetInt32(21), reader.GetString(22))),
-                        new employees(reader.GetInt32(23), reader.GetString(24), reader.GetString(25), new positions(reader.GetInt32(26), reader.GetString(27))),
-                        new status(reader.GetInt32(28), reader.GetString(29)));
+                    if (reader.IsDBNull(reader.GetOrdinal("date_time_end")))
+                        date_time_end = null;
+                    else
+                        date_time_end = reader.GetDateTime(2);
+
+                    if (reader.IsDBNull(reader.GetOrdinal("id_employee_engineer")))
+                        engineer = null;
+                    else
+                        engineer = new employees(reader.GetInt32(24), reader.GetString(25), reader.GetString(26), new positions(reader.GetInt32(27), reader.GetString(28)));
+
+                    ChRequest = new Request(reader.GetInt32(0), reader.GetDateTime(1), date_time_end, reader.GetString(3), reader.GetString(4),
+                        new Customer(reader.GetInt32(5), reader.GetString(6), reader.GetString(7), reader.GetDateTime(8), reader.GetString(9), reader.GetInt64(10)),
+                        new equipment(reader.GetInt32(11), reader.GetString(12), new equipment_class(reader.GetInt32(13), reader.GetString(14)), new vendor(reader.GetInt32(15), reader.GetString(16))),
+                        new services(reader.GetInt32(17), reader.GetString(18)),
+                        new employees(reader.GetInt32(19), reader.GetString(20), reader.GetString(21), new positions(reader.GetInt32(22), reader.GetString(23))),
+                        engineer,
+                        new status(reader.GetInt32(29), reader.GetString(30)));
                 }
             }
             catch (Exception ex)
@@ -184,11 +224,12 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 connection.Open();
 
-                using var command = new MySqlCommand("INSERT INTO requests (date_time_start, urgency, id_customer, id_equipment, id_service, id_employee_reception, id_status) VALUES " +
-                    "(@date_time_start, @urgency, @id_customer, @id_equipment, @id_service, @id_employee_reception, @id_status)", connection);
+                using var command = new MySqlCommand("INSERT INTO requests (date_time_start, urgency, series, id_customer, id_equipment, id_service, id_employee_reception, id_status) VALUES " +
+                    "(@date_time_start, @urgency, @series, @id_customer, @id_equipment, @id_service, @id_employee_reception, @id_status)", connection);
 
                 command.Parameters.AddWithValue("date_time_start", NewRequest.date_time_start);
-                command.Parameters.AddWithValue("urgency", NewRequest.urgency); 
+                command.Parameters.AddWithValue("urgency", NewRequest.urgency);
+                command.Parameters.AddWithValue("series", NewRequest.series);
                 command.Parameters.AddWithValue("id_customer", NewRequest.cus.id_cus);
                 command.Parameters.AddWithValue("id_equipment", NewRequest.eq.id_eq);
                 command.Parameters.AddWithValue("id_service", NewRequest.ser.id_ser);
@@ -217,13 +258,14 @@ namespace DB_service_Infrastructure.MySQLRepositories
 
                 if (UpdatingRequest.stat.name == "Завершено" )
                 {
-                    using var command = new MySqlCommand("UPDATE requests SET date_time_start = @date_time_start, date_time_end = @date_time_end, urgency = @urgency, id_equipment = @id_equipment, id_service = @id_service, " +
+                    using var command = new MySqlCommand("UPDATE requests SET date_time_start = @date_time_start, date_time_end = @date_time_end, urgency = @urgency, series = @series, id_equipment = @id_equipment, id_service = @id_service, " +
                         "id_status = @id_status WHERE id_req = @id;", connection);
 
                     command.Parameters.AddWithValue("id", UpdatingRequest.id_req);
                     command.Parameters.AddWithValue("date_time_start", UpdatingRequest.date_time_start);
                     command.Parameters.AddWithValue("date_time_end", DateTime.Now);
                     command.Parameters.AddWithValue("urgency", UpdatingRequest.urgency);
+                    command.Parameters.AddWithValue("series", UpdatingRequest.series);
                     command.Parameters.AddWithValue("id_equipment", UpdatingRequest.eq.id_eq);
                     command.Parameters.AddWithValue("id_service", UpdatingRequest.ser.id_ser);
                     command.Parameters.AddWithValue("id_status", UpdatingRequest.stat.id_stat);
@@ -232,12 +274,13 @@ namespace DB_service_Infrastructure.MySQLRepositories
                 }
                 else
                 {
-                    using var command = new MySqlCommand("UPDATE requests SET date_time_start = @date_time_start, urgency = @urgency, id_equipment = @id_equipment, id_service = @id_service, " +
+                    using var command = new MySqlCommand("UPDATE requests SET date_time_start = @date_time_start, urgency = @urgency, series = @series, id_equipment = @id_equipment, id_service = @id_service, " +
                         "id_status = @id_status WHERE id_req = @id;", connection);
 
                     command.Parameters.AddWithValue("id", UpdatingRequest.id_req);
                     command.Parameters.AddWithValue("date_time_start", UpdatingRequest.date_time_start);
                     command.Parameters.AddWithValue("urgency", UpdatingRequest.urgency);
+                    command.Parameters.AddWithValue("series", UpdatingRequest.series);
                     command.Parameters.AddWithValue("id_equipment", UpdatingRequest.eq.id_eq);
                     command.Parameters.AddWithValue("id_service", UpdatingRequest.ser.id_ser);
                     command.Parameters.AddWithValue("id_status", UpdatingRequest.stat.id_stat);
@@ -275,11 +318,5 @@ namespace DB_service_Infrastructure.MySQLRepositories
             }
         }
 
-        public int GetId(int currentRow)
-        {
-            var allRequests = new List<Request>(GetRequests());
-
-            return allRequests[currentRow].id_req;
-        }
     }
 }
