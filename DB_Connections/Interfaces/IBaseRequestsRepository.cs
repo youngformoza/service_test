@@ -13,8 +13,6 @@ namespace DB_Connections.Interfaces
 
         Request GetById(int id);
 
-        int GetId(int currentRow);
-
         void AddRequest (Request request);
 
         void Update(Request request);
