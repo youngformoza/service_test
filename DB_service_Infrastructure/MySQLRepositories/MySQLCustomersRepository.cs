@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DB_service_Infrastructure.MySQLRepositories
 {
-    public class MySQLCustomersRepository : IBaseCustomersRepository
+    public class MySQLCustomersRepository : IBaseCustomersRepository 
     {
         protected string ConnectionString { get; set; }
 
@@ -152,11 +152,5 @@ namespace DB_service_Infrastructure.MySQLRepositories
             }
         }
 
-        public int GetId(int currentRow)
-        {
-            var allCustomers = new List<Customer>(GetCustomers());
-
-            return allCustomers[currentRow].id_cus;
-        }
     }
 }
