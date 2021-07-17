@@ -21,6 +21,7 @@ namespace dispatcher.Customers
     public partial class win_save_customer : Window
     {
         public Customer UpdatingCustomer { get; set; }
+        public int exUpdFlag = 0;
 
         public win_save_customer(Customer customer)
         {
@@ -37,15 +38,23 @@ namespace dispatcher.Customers
 
         private void Apply_save_customer(object sender, RoutedEventArgs e)
         {
-            UpdatingCustomer.name = customer_name.Text;
-            UpdatingCustomer.position_cus = customer_position.Text;
-            UpdatingCustomer.mail = customer_mail.Text;
+            if ((customer_name.Text == "") || (customer_position.Text == "") || (customer_mail.Text == "") || (bd_customer.SelectedDate == null) || (customer_phone.Text == ""))
+            {
+                MessageBox.Show("Введены не все данные");
+                exUpdFlag = 1;
+            }
+            else
+            {
+                UpdatingCustomer.name = customer_name.Text;
+                UpdatingCustomer.position_cus = customer_position.Text;
+                UpdatingCustomer.mail = customer_mail.Text;
 
-            if (int.TryParse(customer_phone.Text, out var number))
-                   UpdatingCustomer.phone = number;
+                if (Int64.TryParse(customer_phone.Text, out var number))
+                    UpdatingCustomer.phone = number;
 
-            UpdatingCustomer.birthday = bd_customer.SelectedDate.Value;
 
+                UpdatingCustomer.birthday = bd_customer.SelectedDate.Value;
+            }
             Close();
         }
     }

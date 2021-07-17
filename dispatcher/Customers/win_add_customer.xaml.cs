@@ -22,7 +22,7 @@ namespace dispatcher.Customers
     public partial class win_add_customer : Window
     {
         public Customer AddingCustomer { get; set; }
-
+        public int exAddFlag = 0;
         
         public win_add_customer()
         {
@@ -37,14 +37,22 @@ namespace dispatcher.Customers
 
             AddingCustomer = new Customer("0", "0", "0", '0');
 
-            AddingCustomer.name = customer_name.Text;
-            AddingCustomer.position_cus = customer_position.Text;
-            AddingCustomer.mail = customer_mail.Text;
+            if ((customer_name.Text == "") || (customer_position.Text == "") || (customer_mail.Text == "") || (bd_customer.SelectedDate == null) || (customer_phone.Text == ""))
+            {
+                MessageBox.Show("Введены не все данные");
+                exAddFlag = 1;
+            }
+            else
+            {
+                AddingCustomer.name = customer_name.Text;
+                AddingCustomer.position_cus = customer_position.Text;
+                AddingCustomer.mail = customer_mail.Text;
 
-            if (int.TryParse(customer_phone.Text, out var number))
-                AddingCustomer.phone = number;
-            AddingCustomer.birthday = bd_customer.SelectedDate.Value;
-            
+                if (Int64.TryParse(customer_phone.Text, out var number))
+                    AddingCustomer.phone = number;
+                AddingCustomer.birthday = bd_customer.SelectedDate.Value;
+            }
+
             Close();
         }
 
